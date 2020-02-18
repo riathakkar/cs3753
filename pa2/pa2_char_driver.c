@@ -28,7 +28,9 @@ ssize_t pa2_char_driver_read (struct file *pfile, char __user *buffer, size_t le
 	} else {
 		bytesToRead = maxBytesRead;
 	}
-	
+	if(bytesToRead == 0){
+	printk(KERN_ALERT "END OF DEVIE \n");
+	}
 	bytesRead = bytesToRead - copy_to_user(buffer,device_buffer+*offset, bytesToRead); 
 	
 	printk(KERN_ALERT "bytes read: %d", bytesRead);

@@ -12,7 +12,7 @@ int main(){
 	int whence;
 	char option='b';
 	int read_length=0;
-	char temp_write[BUFFER_SIZE];
+	char buffer[BUFFER_SIZE];
 	ssize_t  data;
 	if(file<0){
 		printf("fail to open file\n");
@@ -31,18 +31,23 @@ int main(){
 		if(option=='r'){
 			printf("enter the number of bytes you want to read\n");
 			scanf("%d",&read_length);
-			char *temp=malloc(read_length);
-			data=read(file,temp,read_length);
+			data=read(file,buffer,read_length);
 			printf("bytes read from device:%d\n",data);
+			printf("read values %s\n",buffer);
+
 
 		}
 		else if(option=='w'){
 			printf("enter data you want to write to the device:\n");
-			scanf("%s",&temp_write);
+			scanf("%s",buffer);
 			while(getchar()!='\n'); 
-			printf("bytes written: %d",write(file,temp_write,strlen(temp_write)));	
+			printf("bytes written: %d",write(file,buffer,strlen(buffer)));	
 		}
 		else if(option=='s'){
+			printf("SEEK COMMANDS:\n");
+				printf("	'0' seek set\n");
+				printf("	'1' seek cur\n");
+				printf("	'2' seek end\n");
 			printf("enter offset value:\n");
 			scanf("%d",&offset);
 			printf("enter a value for whence:\n");
